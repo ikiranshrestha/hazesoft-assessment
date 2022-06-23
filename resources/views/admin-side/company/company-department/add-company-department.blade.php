@@ -7,7 +7,7 @@
                       department info
                     </p>
                     <div class = "col-md-12 alert-message" id="alert-message">
-                    {{-- @include('admin.layouts.message') --}}
+                    @include('admin-side.message')
                     </div>
                     <div class="row">
                         <div class="col-md-6">

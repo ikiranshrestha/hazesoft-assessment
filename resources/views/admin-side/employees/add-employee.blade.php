@@ -54,7 +54,22 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-3">
+                        <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label">Company</label>
+                          <div class="col-sm-9">
+                          <select class="form-control selectpicker"  name="company" value="{{ old('company') }}" id="company">
+                            <option disabled selected>Select Company</option>
+                            @foreach($companyList as $companyDatum):
+                              <option value="{{$companyDatum->id}}">{{$companyDatum->name}}</option>
+                            @endforeach
+                          </select>
+                          </select>
+                          <span style="color: red;"> @error('company'){{$message}} @enderror </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
                         <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Department</label>
                           <div class="col-sm-9">
@@ -69,7 +84,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-3">
                         <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Designation</label>
                           <div class="col-sm-9">

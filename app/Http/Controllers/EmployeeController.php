@@ -12,9 +12,10 @@ class EmployeeController extends Controller
         return view('admin-side.employees.list-employees');
     }
     public function addEmployee(){
+        $companyData = DB::table('companies')->get();
         $departmentData = DB::table('departments')->select('*')->get();
         $designationData = DB::table('designations')->select('*')->get();
-        return view('admin-side.employees.add-employee', ['departmentList' => $departmentData, 'designationList' => $designationData]);
+        return view('admin-side.employees.add-employee', ['companyList' => $companyData,'departmentList' => $departmentData, 'designationList' => $designationData]);
     }
 
     public function create(Request $request){
@@ -38,6 +39,7 @@ class EmployeeController extends Controller
         $data['email'] = $request->email;
         $data['contact'] = $request->contact;
         $data['designation_id'] = $request->designation;
+        $data['company_id'] = $request->company;
         $data['created_at'] = date('Y-m-d H:i:s');
 
         $last_id = DB::table('employees')->insertGetId($data);

@@ -36,7 +36,15 @@ class CompanyController extends Controller
         $data['contact'] = $request->contact;
         $data['created_at'] = date('Y-m-d H:i:s');       
         
-        DB::table('companies')->insert($data);    
+        
+        $createCompany = DB::table('companies')->insert($data);
+        if(!$createCompany)
+        {
+            return redirect()->back()->with('error', 'Something went wrong!');
+
+        }else{
+            return redirect()->route('add-company')->with('success', 'Company Created!');
+        }   
         }
 
     }
@@ -58,7 +66,14 @@ class CompanyController extends Controller
         $data['department_id'] = $request->department;
         $data['created_at'] = date('Y-m-d H:i:s');
 
-        DB::table('company_departments')->insert($data); 
+        $createCompany = DB::table('company_departments')->insert($data);
+        if(!$createCompany)
+        {
+            return redirect()->back()->with('error', 'Something went wrong!');
+
+        }else{
+            return redirect()->route('add-company-dept', ['id'=> $data['company_id']])->with('success', 'Department Added to company!');
+        }
     }
 
     public function listCompanyDepartment(){

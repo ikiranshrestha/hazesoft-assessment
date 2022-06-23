@@ -19,7 +19,9 @@ class CreateEmployeesTable extends Migration
             $table->integer('employee_number')->unique();
             $table->string('email', 50)->unique();
             $table->string('contact', 30)->unique();
-            $table->foreignId('designation_id')->constrained('designations');
+            // $table->foreignId('designation_id')->constrained('designations');
+            $table->integer('designation_id');
+            $table->foreignId('company_id')->constrained('companies');
             $table->timestamps();
         });
     }
