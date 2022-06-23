@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
@@ -17,10 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('admin-side.layout');
     // return env('ASSESSMENT_ATTEMPTED_BY');
 });
+
+Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
+Route::post('/admin/login', [AdminController::class, 'loginValidate'])->name('loginValidate');
+
 
 //company
 Route::get('/admin/list-companies', [CompanyController::class, 'fetchData'])->name('list-companies');
@@ -30,7 +35,7 @@ Route::post('/admin/add-company', [CompanyController::class, 'create']);
 //company-department
 Route::get('/admin/add-department-to-company/{id}', [CompanyController::class, 'addCompanyDepartment'])->name('add-company-dept');
 Route::post('/admin/add-department-to-company/{id}', [CompanyController::class, 'createCompanyDepartment']);
-Route::get('/admin/list-company-department', [CompanyController::class, 'listCompanyDepartment'])->name('list-company-dept');
+Route::get('/admin/list-company-department/{id}', [CompanyController::class, 'listCompanyDepartment'])->name('list-company-dept');
 Route::get('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartments'])->name('add-employee-dept');
 Route::POST('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartmentsPost']);
 
@@ -50,4 +55,3 @@ Route::post('/admin/add-employee', [EmployeeController::class, 'create']);
 Route::get('/admin/list-designation', [DesignationController::class, 'fetchDesignation'])->name('list-designation');
 Route::get('/admin/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation');
 Route::post('/admin/add-designation', [DesignationController::class, 'create']);
-// //add this 
