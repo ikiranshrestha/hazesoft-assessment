@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Validator;
 class EmployeeController extends Controller
 {
     public function fetchEmployees(){
-        return view('admin-side.employees.list-employees');
+        $employeeData = DB::table('employees')->select('employees.name as emp_name', 'employees.email as emp_email', 'employees.contact as emp_contact', 'companies.name as cmp_name', 'companies.location')
+        ->join('companies', 'employees.company_id', '=', 'companies.id')
+        ->get();
+        return view('admin-side.employees.list-employees', ['employeeList' => $employeeData]);
     }
     public function addEmployee(){
         $companyData = DB::table('companies')->get();

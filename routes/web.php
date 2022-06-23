@@ -21,37 +21,41 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('admin-side.layout');
     // return env('ASSESSMENT_ATTEMPTED_BY');
-});
+})->middleware('isLoggedin');
+Route::get('/', function () {
+    return route('dashboard');
+})->middleware('isLoggedin');
 
-Route::get('/admin/login', [AdminController::class, 'login'])->name('login');
-Route::post('/admin/login', [AdminController::class, 'loginValidate'])->name('loginValidate');
+Route::get('/admin/login', [AdminController::class, 'login'])->name('login')->middleware('isLoggedin');
+Route::post('/admin/login', [AdminController::class, 'loginValidate'])->name('loginValidate')->middleware('isLoggedin');
+Route::get('/admin/logout', [AdminController::class, 'logout'])->name('logout');
 
 
 //company
-Route::get('/admin/list-companies', [CompanyController::class, 'fetchData'])->name('list-companies');
-Route::get('/admin/add-company', [CompanyController::class, 'addCompany'])->name('add-company');
-Route::post('/admin/add-company', [CompanyController::class, 'create']);
+Route::get('/admin/list-companies', [CompanyController::class, 'fetchData'])->name('list-companies')->middleware('isLoggedin');
+Route::get('/admin/add-company', [CompanyController::class, 'addCompany'])->name('add-company')->middleware('isLoggedin');
+Route::post('/admin/add-company', [CompanyController::class, 'create'])->middleware('isLoggedin');
 
 //company-department
-Route::get('/admin/add-department-to-company/{id}', [CompanyController::class, 'addCompanyDepartment'])->name('add-company-dept');
-Route::post('/admin/add-department-to-company/{id}', [CompanyController::class, 'createCompanyDepartment']);
-Route::get('/admin/list-company-department/{id}', [CompanyController::class, 'listCompanyDepartment'])->name('list-company-dept');
-Route::get('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartments'])->name('add-employee-dept');
-Route::POST('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartmentsPost']);
+Route::get('/admin/add-department-to-company/{id}', [CompanyController::class, 'addCompanyDepartment'])->name('add-company-dept')->middleware('isLoggedin');
+Route::post('/admin/add-department-to-company/{id}', [CompanyController::class, 'createCompanyDepartment'])->middleware('isLoggedin');
+Route::get('/admin/list-company-department/{id}', [CompanyController::class, 'listCompanyDepartment'])->name('list-company-dept')->middleware('isLoggedin');
+Route::get('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartments'])->name('add-employee-dept')->middleware('isLoggedin');
+Route::POST('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartmentsPost'])->middleware('isLoggedin');
 
 //departments
-Route::get('/admin/list-departments', [DepartmentController::class, 'fetchDepartments'])->name('list-departments');
-Route::get('/admin/add-department', [DepartmentController::class, 'addDepartment'])->name('add-department');
-Route::post('/admin/add-department', [DepartmentController::class, 'create']);
+Route::get('/admin/list-departments', [DepartmentController::class, 'fetchDepartments'])->name('list-departments')->middleware('isLoggedin');
+Route::get('/admin/add-department', [DepartmentController::class, 'addDepartment'])->name('add-department')->middleware('isLoggedin');
+Route::post('/admin/add-department', [DepartmentController::class, 'create'])->middleware('isLoggedin');
 
 
 //employees
-Route::get('/admin/list-employees', [EmployeeController::class, 'fetchEmployees'])->name('list-employees');
+Route::get('/admin/list-employees', [EmployeeController::class, 'fetchEmployees'])->name('list-employees')->middleware('isLoggedin');
 Route::get('/admin/add-employee', [EmployeeController::class, 'addEmployee'])->name('add-employee');
 Route::post('/admin/add-employee', [EmployeeController::class, 'create']);
 
 
 //designations
-Route::get('/admin/list-designation', [DesignationController::class, 'fetchDesignation'])->name('list-designation');
-Route::get('/admin/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation');
-Route::post('/admin/add-designation', [DesignationController::class, 'create']);
+Route::get('/admin/list-designation', [DesignationController::class, 'fetchDesignation'])->name('list-designation')->middleware('isLoggedin');
+Route::get('/admin/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation')->middleware('isLoggedin');
+Route::post('/admin/add-designation', [DesignationController::class, 'create'])->middleware('isLoggedin');

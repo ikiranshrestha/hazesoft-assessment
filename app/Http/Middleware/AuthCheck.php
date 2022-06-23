@@ -16,11 +16,20 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!session()->has('LoggedInUser')){
-            // return $next($request);
-            return redirect('admin/login');
-        }else{
-        return $next($request);
-    }
+        // if(!session()->has('LoggedInUser')){
+        //     // return $next($request);
+        //     return redirect('admin/login');
+        // }
+        // return $next($request);
+
+        if(!session()->has('LoggedInUser') && ($request->path() != 'admin/login')){
+            return redirect('admin/login')->with('error', 'Login to access!');
+        }
+        if(session()->has('LoggedInUser') && ($request->path() == 'admin/login')){
+            return redirect('/dashboard');
+        }
+        return $next($request)->header('Cache-Control','no-cache, no-store, max-age=0, must-revalidate')
+                            ->header('Pragma','no-cache')
+                            ->header('Expires','Sat 01 Jan 1990 00:00:00 GMT');
     }
 }

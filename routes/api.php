@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/companies', [CompanyController::class, 'getCompanies']);
-Route::get('/companyDepartments', [CompanyDepartmentController::class, 'getCompanyDepartments']);
+Route::get('/companyDepartments', [CompanyDepartmentController::class, 'getCompanyDepartments'])->middleware('isLoggedin');
 Route::get('/companyEmployees', [CompanyEmployeesController::class, 'getCompanyEmployees']);
-Route::get('/companyDepartmentEmployees', [CompanyDepartmentEmployeesController::class, 'getCompanyDepartmentEmployees']);
-Route::get('/EmployeeDetails', [EmployeeDetails::class, 'getEmployeeDetails']);
+Route::get('/companyDepartmentEmployees', [CompanyDepartmentEmployeesController::class, 'getCompanyDepartmentEmployees'])->middleware('isLoggedin');
+Route::get('/EmployeeDetails', [EmployeeDetails::class, 'getEmployeeDetails'])->middleware('isLoggedin');

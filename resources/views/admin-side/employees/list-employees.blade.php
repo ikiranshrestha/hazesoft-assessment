@@ -9,18 +9,22 @@
 
 <thead>
                         <tr>
-                          <th>Company Name</th>
-                          <th>Location</th>
+                          <th>Employee Name</th>
+                          <th>Company</th>
                           <th>Contact</th>
+                          <th>Email</th>
                         </tr>
                       </thead>
                       <tbody>
-                          {{-- @foreach($courseInfo as $course):
+                          @foreach($employeeList as $employee):
                         <tr>
-                          <td>{{$course->vehicle_category}}</td>
-                          <td>{{$course->course_type}}</td>
+                          <td>{{$employee->emp_name}}</td>
+                          <td>{{$employee->cmp_name}}, {{ $employee->location }}</td>
+                          <td>{{$employee->emp_contact}}</td>
+                          <td>{{$employee->emp_email}}</td>
+                          {{-- <td>{{$course->course_type}}</td> --}}
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                       </tbody>
                 </div>
                 </div>

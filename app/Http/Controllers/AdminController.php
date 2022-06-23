@@ -36,7 +36,7 @@ class AdminController extends Controller
     {
         if(session()->has('LoggedInUser')){
             session()->pull('LoggedInUser');
-            return redirect('auth/login');
+            return redirect('admin/login');
         }
     }
 }
