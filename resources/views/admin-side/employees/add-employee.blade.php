@@ -69,7 +69,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-3">
+                      {{-- <div class="col-md-3">
                         <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Department</label>
                           <div class="col-sm-9">
@@ -83,7 +83,7 @@
                           <span style="color: red;"> @error('department'){{$message}} @enderror </span>
                           </div>
                         </div>
-                      </div>
+                      </div> --}}
                       <div class="col-md-3">
                         <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">Designation</label>

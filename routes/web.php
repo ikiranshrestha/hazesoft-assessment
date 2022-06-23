@@ -31,6 +31,8 @@ Route::post('/admin/add-company', [CompanyController::class, 'create']);
 Route::get('/admin/add-department-to-company/{id}', [CompanyController::class, 'addCompanyDepartment'])->name('add-company-dept');
 Route::post('/admin/add-department-to-company/{id}', [CompanyController::class, 'createCompanyDepartment']);
 Route::get('/admin/list-company-department', [CompanyController::class, 'listCompanyDepartment'])->name('list-company-dept');
+Route::get('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartments'])->name('add-employee-dept');
+Route::POST('/admin/add-employee-to-department/{id}', [EmployeeController::class, 'addEmployeeToCompanyDepartmentsPost']);
 
 //departments
 Route::get('/admin/list-departments', [DepartmentController::class, 'fetchDepartments'])->name('list-departments');

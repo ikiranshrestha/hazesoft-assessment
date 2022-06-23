@@ -44,13 +44,13 @@ class EmployeeController extends Controller
 
         $last_id = DB::table('employees')->insertGetId($data);
 
-        $depts = $request->department;
-        foreach($depts as $dept){
-            $data2['department_id'] = $dept;
-            $data2['employee_id'] = $last_id;
-            $data2['created_at'] = $data['created_at'];
-            DB::table('employee_departments')->insert($data2);
-        }
+        // $depts = $request->department;
+        // foreach($depts as $dept){
+        //     $data2['department_id'] = $dept;
+        //     $data2['employee_id'] = $last_id;
+        //     $data2['created_at'] = $data['created_at'];
+        //     DB::table('employee_departments')->insert($data2);
+        // }
         }
 
     }
@@ -60,5 +60,30 @@ class EmployeeController extends Controller
 
         return view('admin-side.departments.list-departments', ['employeeList' => $employeeData]);
 
+    }
+
+    public function addEmployeeToCompanyDepartments($cid){
+        $employee = DB::table('employees')->select('*')->where('company_id', $cid)->get();
+        $department = DB::table('company_departments')->select('*')
+        ->join('departments', 'company_departments.department_id', '=', 'departments.id')
+        ->where('company_departments.company_id', $cid)->get();
+
+        // echo $department;
+        // die;
+
+        return view('admin-side.company.company-department.add-employee-to-department', ['employee' => $employee, 'department' => $department]);
+    }
+
+    public function addEmployeeToCompanyDepartmentsPost(Request $request){
+        // $last_id = DB::table('employees')->insertGetId($data);
+
+        $depts = $request->department;
+        
+        foreach($depts as $dept){
+            $data['employee_id'] = $request->employee;
+            $data['department_id'] = $dept;
+            $data['created_at'] = date('Y-m-d H:i:s');
+            DB::table('employee_departments')->insert($data);
+        }
     }
 }

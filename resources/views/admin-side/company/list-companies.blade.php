@@ -23,7 +23,8 @@
                           <td>{{$companyDatum->location}}</td>
                           <td>{{$companyDatum->contact}}</td>
                           <td><a href="" class="btn btn-sm btn-warning" title="Edit Company">Edit</a><a href="" class="btn btn-sm btn-danger" title="Delete Company">Delete</a></td>
-                          <td><a href="{{ route('add-company-dept', ['id'=>$companyDatum->id]) }}" class="btn btn-sm btn-success" title="Add Department">Add</a><a href="{{ route('list-company-dept') }}" class="btn btn-sm btn-warning" title="Manage Department">Manage</a></td>
+                          <td><a href="{{ route('add-company-dept', ['id'=>$companyDatum->id]) }}" class="btn btn-sm btn-success" title="Add Department">Add</a><a href="{{ route('list-company-dept', ['id'=>$companyDatum->id]) }}" class="btn btn-sm btn-warning" title="Manage Department">Manage</a>
+                            <a href="{{ route('add-employee-dept', ['id'=>$companyDatum->id]) }}" class="btn btn-sm btn-warning" title="Add Employee">Add Employee</a></td>
                         </tr>
                         @endforeach
                       </tbody>
